@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 import com.ty.person.dto.Charcy;
 import com.ty.person.dto.Vehicle;
 
-public class TestSaveVehicleAndCharcy {
+public class UpdateVehicleAndCharcy {
 
 	public static void main(String[] args) {
 
@@ -16,18 +16,15 @@ public class TestSaveVehicleAndCharcy {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 
-		Vehicle vehicle = new Vehicle();
-
-		vehicle.setName("tt-20");
-		vehicle.setCost(50000);
-
-		Charcy charcy = new Charcy();
-		charcy.setCharcyNumber("IND188789KA");
-		charcy.setType("desel");
-
-		vehicle.setCharcy(charcy);
 		entityTransaction.begin();
-		entityManager.persist(vehicle);
+		Vehicle vehicle=entityManager.find(Vehicle.class, 2);
+		
+		vehicle.setName("hero");
+		Charcy charcy = vehicle.getCharcy();
+		charcy.setType("petrol");
+		entityManager.merge(vehicle);
+		entityManager.merge(charcy);
 		entityTransaction.commit();
+		
 	}
 }

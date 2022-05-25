@@ -2,6 +2,7 @@ package com.ty.person.dto;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ public class Vehicle {
 	private double cost;
 
 	//@OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})OR
-	@OneToOne(cascade =CascadeType.ALL)
+	@OneToOne(cascade =CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="charcy_id")
 	private Charcy charcy;
 
